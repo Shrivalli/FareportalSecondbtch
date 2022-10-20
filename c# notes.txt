@@ -1,0 +1,438 @@
+classic ASP and VB6
+
+.NET F/w - C++,VB, - windows
+
+
+.NET core: - Windows, Linux and Mac OS
+
+.NET core provides:
+1. Multiple Languages - C#, VB, J#, F# 
+2. Base class Libraries - 
+3. CLR - Common Language Runtime 
+
+source code - compile - build - execute - see output
+
+Types of Applications:
+1. Desktop - Console (Without GUI) and Windows (GUI)
+2. Web Applications 
+3. Mobile Applications - Xamarin
+
+VS code and command prompt - 
+
+To create a new console app in .NET core:
+
+dotnet new console --name firstconsoleapp
+
+.NET core 5/6
+
+
+Datatypes in .net core:
+1. Value types - int, float, bool, datetime, enum, struct,
+2. Reference types - string, object, class, interface, delegate
+3. Boxing - Converting value type to reference type
+4. UnBoxing - converting ref type to value type
+
+Type conversions:
+object is the super datatype
+
+OOPS:
+1. Class - Generalization concepts - User defined datatype
+A class is an entity which has its own member variables and member functions.
+2. Object - specializaiton - instance of a class
+3. Data Encapsulation - wrapping of member variables and methods into an entity called class.
+4. Data Abstraction - Hiding of unnecessary details and projecting necessary information to the client app.
+
+Data abstraction is implemented through access specifiers:
+1. private - 
+2. protected
+3. internal - with in the same namespace 
+4. public 
+
+class member variables are private by default.
+namespace - public
+class - internal
+
+Properties: getters and setters
+public int Eid{get;set;}
+read only properties 
+
+public int Eid{get;}
+
+Inheritance
+
+virtual methods - Those methods which have definition in the base class and are allowing the derived 
+class to have their own definitions by overriding these methods in the derived class.
+
+If the reference variable is of base class and the memory is alloted of derived
+Shape s =new Rectange
+
+1. if new method is in derived class - base class method is called
+2. if override method is in derived class - derived class method is called
+
+
+Abstract method is a method which do not have a definition.
+A class which has atleast one abstract method(can have non-abstract methods) - Abstract classes
+
+Abstract class cannot be instantiated(creating an instance)
+Abstract class should be inherited.
+
+Abstract class can contain both abstract and non abstract methods.
+Sealed class has to be instantiated but cannot be inherited.
+
+static class can neither be inherited nor instantiated.
+
+All member variables and methods has to be static 
+
+Multiple inheritance is not supported in .NET
+
+
+Interface:
+
+It is a blue print of class
+interface contains abstract methods and (non abstract methods) and its a set of specifications or rules
+Purpose of interface - alternate solution for multiple inheritance
+
+
+DLL - dynamic Link Library
+
+Assembly - output of the project , which contains Portable Executable (PE) and Metadata.
+
+Assembly can be either exe or dll
+
+Console applications - we get exe
+class library  - dll
+
+1. To create a class lib:
+dotnet new classlib -o MyLib --> dotnet build MyLib.csproj
+
+2. exe project, give reference of dll in .csproj
+  <ItemGroup>
+    <ProjectReference Include="..\MyLib\MyLib.csproj" />
+  </ItemGroup>
+
+3.solution is a collection of projects. To create a solution
+
+dotnet "new" "sln" "-n" "Firstsln" "-o" "h:\Learnings\ASP.NET Core\MyLib"
+
+4. Add both projects (exe and dll into sln) - command prompt
+dotnet "sln" "h:\Learnings\ASP.NET Core\MyLib\Firstsln.sln" "add" "h:\Learnings\ASP.NET Core\MyLib\MyLib.csproj" 
+dotnet "sln" "h:\Learnings\ASP.NET Core\MyLib\Firstsln.sln" "add" "h:\Learnings\ASP.NET Core\Calculatoreg.csproj" 
+
+5. In exe mention the namespace by
+
+using MyLib;
+
+Delegate:
+Function pointers
+
+Types
+1. Single Cast delegate
+2. Multip cast delegate
+
+File Handling:
+FileStream - System.IO
+StreamWriter
+
+Collections:
+1. ArrayList
+2. Hashtable
+3. Stack
+4. Queue
+
+Generics: Type specific
+1. List<Value>
+2. Dictionary<key,value>
+3. HashSet - unique records
+
+Exceptions:
+1. Try - set of statements which might cause an error
+2. catch - handler - exceptions are handled
+3. finally - release the resources whether exception occurs or not
+
+Exception 
+1. SystemException - built in Exceptions
+2. ApplicaitonException - user defined
+
+Web applications:
+
+Website - collection of web pages (both static and dynamic)
+
+Web Application - Web Pages+ Business Logic
+
+Hosting/Deploying it on the Application server 
+
+
+Three types of Web apps:
+1. Web Apps/ web pages - Model and View
+2. MVC - Model View Controller
+3. API - 
+
+MVC -
+Model - Data Access Layer + Business Logic Layer
+View - Presentation Layer - Razor Pages
+Controller - Handling the request of the client and act as an intermediate between views and models.
+
+
+Controller - is a class which is a collection of action methods
+Methods which returns a View (not always)
+Every controller should end with a suffix of 'Controller' word.
+
+Razor Pages - .cshtml
+handles both html and cs code. @ - Razor symbol which marks the beginning of cs code
+
+Scope of ViewBag and ViewData is between the View and the corresponding action method.
+
+Lifecycle of MVC:
+
+Session variables:
+1. SetString
+2. GetString
+
+
+Five templates for views:
+1. List - get all records 
+2. Create - add a new record
+3. Details - to know more details about a record
+4. Edit - edit a record
+5. Delete - Delete a record
+
+
+To install code generator in vs code:
+dotnet tool install -g dotnet-aspnet-codegenerator --version 5.0.2
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 5.0.2
+
+dotnet aspnet-codegenerator view getallEmps List -m Employee -outDir Views\Employee --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator view AddEmployee Create -m Employee -outDir Views\Employee --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Details Details -m Employee -outDir Views\Employee --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Delete Delete -m Employee -outDir Views\Employee --useDefaultLayout --referenceScriptLibraries
+
+
+ADO.NET - Active X Data object 
+used to connect to the back end
+
+1. connection
+2. command
+3. execute the statements
+4. Releasing the resources
+
+Entity Framework Core: layer above ADO.NET
+connect to the Database
+ORM - Object Relation Mapping 
+
+create table Product
+(
+pid int primary key,
+pname varchar(20),
+price float,
+qty int,
+doexp date
+)
+
+context - front end db - collection of classes(mapped classes of a table)
+class Product
+{
+public int Pid{get;set;}
+public string Pname{get;set;}
+public float Price{get;set;}
+public int qyt{get;set;}
+public DateTime doexp{get;set;}
+}
+
+3 packages:
+1. Entity Framework core
+2. EF core SQL
+3. EF core Tools
+
+dotnet add package Microsoft.EntityFrameworkCore -v 5.0.17
+dotnet add package Microsoft.EntityFrameworkCore.tools -v 5.0.17
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.17
+
+2 classes:
+1. DbContext - class from which our context will be inherited
+2. DbSet<Product> - select * from product - collection of recordset
+
+Cmd for vscode:
+dotnet tool install --global dotnet-ef
+dotnet ef dbcontext scaffold "Server=(localdb)\MSSQLLocalDB;Database=Fareportal;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+PM Console: 
+Scaffold-DbContext "Server=(localdb)\MSSQLLocalDB;Database=Fareportal;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+In appsettings.json:
+ "ConnectionStrings": {
+      "DefaultConnection": "Server=(localdb)\MSSQLLocalDB;Database=Cambridge;Trusted_Connection=True;"
+    },
+
+ Startup.cs
+ services.AddDbContext<OrganizationContext>(options =>
+       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
